@@ -24,9 +24,17 @@ public class CustomerController {
     }
 
     @PostMapping
-    public  ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
+    public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
         Customer newCustomer = customerService.addCustomer(customer);
 
         return new ResponseEntity<>(newCustomer, HttpStatus.CREATED);
     }
+
+    @DeleteMapping(path = "{customerId}")
+    public ResponseEntity<Customer> deleteCustomer(@PathVariable("customerId") Long customerId) {
+        customerService.deleteCustomer(customerId);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
