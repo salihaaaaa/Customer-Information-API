@@ -2,6 +2,7 @@ package com.example.Customer.Information.API.customer;
 
 import com.example.Customer.Information.API.exception.CustomerNotFoundException;
 import com.example.Customer.Information.API.exception.EmailAlreadyExistsException;
+import com.example.Customer.Information.API.exception.IdNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +36,16 @@ public class CustomerService {
 
         Customer newCustomer = customerRepository.save(customer);
         return newCustomer;
+    }
+
+    public void deleteCustomer(Long customerId) {
+        boolean isExists = customerRepository.existsById(customerId);
+
+        if (!isExists) {
+            throw new IdNotFoundException("Id " + customerId + " not found");
+        }
+
+        customerRepository.deleteById(customerId);
+
     }
 }
