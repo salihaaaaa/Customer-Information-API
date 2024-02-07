@@ -1,10 +1,12 @@
 package com.example.Customer.Information.API.customer;
 
 import com.example.Customer.Information.API.exception.CustomerNotFoundException;
+import com.example.Customer.Information.API.exception.EmailAlreadyExistsException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -22,5 +24,16 @@ public class CustomerService {
         }
 
         return allCustomers;
+    }
+
+    public Customer addCustomer(Customer customer) {
+        Optional<Customer> customerByEmail = customerRepository.findCustomerByEmail(customer.getEmail());
+
+        if (customerByEmail.isPresent()) {
+            throw new EmailAlreadyExistsException("Email " + customerByEmail.get().getEmail() + " already exists!");
+        }
+
+        Customer newCustomer = customerRepository.save(customer);
+        return newCustomer;
     }
 }
