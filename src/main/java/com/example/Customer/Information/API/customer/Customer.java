@@ -3,6 +3,7 @@ package com.example.Customer.Information.API.customer;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 @Entity
 @Table
@@ -31,27 +32,23 @@ public class Customer {
     public Customer(String name,
                     String email,
                     Gender gender,
-                    LocalDate dateOfBirth,
-                    Integer age) {
+                    LocalDate dateOfBirth) {
         this.name = name;
         this.email = email;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
-        this.age = age;
     }
 
     public Customer(Long id,
                     String name,
                     String email,
                     Gender gender,
-                    LocalDate dateOfBirth,
-                    Integer age) {
+                    LocalDate dateOfBirth) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
-        this.age = age;
     }
 
     public Long getId() {
@@ -95,7 +92,7 @@ public class Customer {
     }
 
     public Integer getAge() {
-        return age;
+        return Period.between(this.dateOfBirth, LocalDate.now()).getYears();
     }
 
     public void setAge(Integer age) {
