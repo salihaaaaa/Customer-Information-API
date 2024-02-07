@@ -35,4 +35,17 @@ public class ApiExceptionHandler {
 
         return new ResponseEntity<>(apiException, conflict);
     }
+
+    @ExceptionHandler(value = IdNotFoundException.class)
+    public ResponseEntity<Object> handleIdNotFoundException(IdNotFoundException idNotFoundException) {
+        HttpStatus notFound = HttpStatus.NOT_FOUND;
+
+        ApiException apiException = new ApiException(
+                idNotFoundException.getMessage(),
+                notFound,
+                ZonedDateTime.now(ZoneId.of("Z"))
+        );
+
+        return new ResponseEntity<>(apiException, notFound);
+    }
 }
