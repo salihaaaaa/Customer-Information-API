@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -33,6 +34,17 @@ public class CustomerController {
     @DeleteMapping(path = "{customerId}")
     public ResponseEntity<Customer> deleteCustomer(@PathVariable("customerId") Long customerId) {
         customerService.deleteCustomer(customerId);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping(path = "{customerId}")
+    public ResponseEntity<Customer> updateCustomer(@PathVariable("customerId") Long customerId,
+                                                   @RequestParam(required = false) String name,
+                                                   @RequestParam(required = false) String email,
+                                                   @RequestParam(required = false) Gender gender,
+                                                   @RequestParam(required = false) LocalDate dateOfBirth) {
+        customerService.updateCustomer(customerId, name, email, gender, dateOfBirth);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
