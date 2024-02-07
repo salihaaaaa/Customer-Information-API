@@ -40,19 +40,14 @@ This project is a RESTful API built with Spring Boot and PostgreSQL to manage cu
 4. **Access the application at http://localhost:8080/api/customer**
 
  ## API Testing with Postman
-  - Execute the requests in Postman to test the API endpoints.
+   Execute the requests in Postman to test the API endpoints.
 
-  **Create Customer**
-    - POST localhost:8080/api/customer
+   **Create Customer:** POST localhost:8080/api/customer
 
-  **Get Customer**
-    - GET localhost:8080/api/customer
-    - GET localhost:8080/api/customer/{id}
+   **Get Customer:** GET localhost:8080/api/customer & GET localhost:8080/api/customer/{id}
 
- **Update Customer**
-    - UPDATE localhost:8080/api/customer/{id}
+   **Update Customer:** UPDATE localhost:8080/api/customer/{id}
 
- **Delete Customer**
-    - DELETE localhost:8080/api/customer/{id}
+   **Delete Customer:** DELETE localhost:8080/api/customer/{id}
 
   
