@@ -22,4 +22,17 @@ public class ApiExceptionHandler {
 
         return new ResponseEntity<>(apiException, notFound);
     }
+
+    @ExceptionHandler(value = EmailAlreadyExistsException.class)
+    public ResponseEntity<Object> handleEmailAlreadyExistsException(EmailAlreadyExistsException emailAlreadyExistsException) {
+        HttpStatus conflict = HttpStatus.CONFLICT;
+
+        ApiException apiException = new ApiException(
+                emailAlreadyExistsException.getMessage(),
+                conflict,
+                ZonedDateTime.now(ZoneId.of("Z"))
+        );
+
+        return new ResponseEntity<>(apiException, conflict);
+    }
 }
