@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/customer")
@@ -22,6 +23,13 @@ public class CustomerController {
         List<Customer> allCustomers = customerService.getAllCustomers();
 
         return new ResponseEntity<>(allCustomers, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "{customerId}")
+    public ResponseEntity<Object> getCustomerById(@PathVariable("customerId") Long customerId) {
+        Optional<Customer> customer = customerService.getCustomerById(customerId);
+
+        return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
     @PostMapping
