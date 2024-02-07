@@ -4,7 +4,6 @@ import com.example.Customer.Information.API.exception.CustomerNotFoundException;
 import com.example.Customer.Information.API.exception.EmailAlreadyExistsException;
 import com.example.Customer.Information.API.exception.IdNotFoundException;
 import jakarta.transaction.Transactional;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -80,5 +79,15 @@ public class CustomerService {
         if (dateOfBirth != null && !Objects.equals(customer.getDateOfBirth(), dateOfBirth)) {
             customer.setDateOfBirth(dateOfBirth);
         }
+    }
+
+    public Optional<Customer> getCustomerById(Long customerId) {
+        Optional<Customer> customer = customerRepository.findById(customerId);
+
+        if (customer.isEmpty()) {
+            throw new IdNotFoundException("customer with id " + customerId + " does not exist");
+        }
+
+        return customer;
     }
 }
